@@ -1,0 +1,38 @@
+#Cards {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    padding-left: 10px;
+    height: 100px;
+    padding-top: 50px;
+}
+
+
+
+.tracker-card {
+    border: 1px solid black;
+    justify-content: center;
+    flex: 10;
+    border-radius: 5%;
+
+}
+
+.choice-btn {
+    display: flex;
+    gap: 80px;
+    border: 1px solid black;
+    margin-top: 100px;
+}
+
+.choice-btn div {
+    border: 1px solid black;
+    border-radius: 5%;
+    flex: 0.1;
+    
+}
+
+#job-container {
+    margin-top: 90px;
+    border: 1px solid black;
+    height: 400px
+}
