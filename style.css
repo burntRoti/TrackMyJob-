@@ -21,7 +21,7 @@
 
 .choice-btn {
     display: flex;
-    gap: 80px;
+    justify-content: space-around;
     border: 1px solid black;
     margin-top: 100px;
 
@@ -33,7 +33,22 @@
     flex: 0.1;
     display: grid;
     place-items: center;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
     
+}
+
+.choice-btn div:hover {
+    transform:scale(1.2) translateY(-8px);
+}
+
+.choice-btn div:active {
+    transform: translateY(0);
+}
+
+.choice-btn div:focus {
+    outline: 6px solid orange;
+    background-color: brown;
 }
 
 #container {
@@ -45,8 +60,6 @@
 
 .job {
     border: 1px solid black;
-    
-    
 }
 
 #job-container {
