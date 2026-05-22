@@ -16,10 +16,12 @@ const divs = document.querySelectorAll(".choice-btn div");
 const overlay = document.querySelector("#form-over");
 const incTot = document.querySelector("#total-card p:last-child");
 
+//iterating through each div
 divs.forEach(div => {
     if (div.id == "application") {
+        //check for clicks.. () => is short for function()
         div.addEventListener("click", () => {
-            overlay.classList.add("active");
+            overlay.classList.add("active"); //classList is a way to manage an element's classes in DOM
         });
 
         const addJob = document.getElementById("AddJob");
@@ -33,6 +35,7 @@ divs.forEach(div => {
                 return;
             }
 
+            //creates a job card
             const job_card = document.createElement('div');
             job_card.classList.add("Job-card");
             job_card.setAttribute('data-status', 'Applied');
@@ -68,7 +71,9 @@ divs.forEach(div => {
 
             // Remove Logic
             job_card.querySelector(".remove-btn").addEventListener("click", function() {
+                //if the remove button is clicked then delete the job card div
                 const currentStatus = job_card.getAttribute('data-status');
+                //this removes the div
                 job_card.remove();
                 
                 incTot.textContent = parseInt(incTot.textContent) - 1;
