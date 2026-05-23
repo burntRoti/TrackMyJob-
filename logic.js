@@ -1,4 +1,7 @@
 // Helper to update counters
+
+let count = 0;
+
 function updateCounter(status, change) {
     let counterElement;
     switch(status) {
@@ -29,8 +32,8 @@ divs.forEach(div => {
             const jobTitle = document.getElementById('job-title').value;
             const job_url = document.getElementById('job-url').value;
             const company_name = document.getElementById('company-name').value;
-
-            if (jobTitle === "" || job_url === "" || company_name === "") {
+            const job_desc = document.getElementById("job-description").value;
+            if (jobTitle === "" || job_url === "" || company_name === "" || job_desc === "" ) {
                 alert("Please fill in all fields!");
                 return;
             }
@@ -39,11 +42,15 @@ divs.forEach(div => {
             const job_card = document.createElement('div');
             job_card.classList.add("Job-card");
             job_card.setAttribute('data-status', 'Applied');
-
+            count++;
             job_card.innerHTML = `
-                <p class="status-display">Status: Applied</p>
+                <p> ${count} </p>
                 <p> ${jobTitle} </p>
                 <p> ${company_name} </p>
+                <p class="status-display">Status: Applied</p>
+                <p> ${Date.now()} </p>
+                <p> ${job_desc} </p>
+
                 <div class="status-controls">
                     <button class="status-btn" data-target="Interview">Interview</button>
                     <button class="status-btn" data-target="Offer">Offer</button>
@@ -75,6 +82,7 @@ divs.forEach(div => {
                 const currentStatus = job_card.getAttribute('data-status');
                 //this removes the div
                 job_card.remove();
+                count--;
                 
                 incTot.textContent = parseInt(incTot.textContent) - 1;
                 updateCounter(currentStatus, -1);
