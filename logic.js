@@ -19,6 +19,21 @@ const divs = document.querySelectorAll(".choice-btn div");
 const overlay = document.querySelector("#form-over");
 const incTot = document.querySelector("#total-card p:last-child");
 
+function filterCards(div) {
+    div.addEventListener("click", ()=> {
+        const allCards = document.querySelectorAll(".Job-card")
+        allCards.forEach(card => {
+            const status = card.getAttribute('data-status')
+            if(div.id == 'all' || div.id === status) {
+                card.style.display = 'flex';
+            }
+            else {
+                card.style.display = 'none';
+            }
+        })
+    })
+}
+
 //iterating through each div
 divs.forEach(div => {
     if (div.id == "application") {
@@ -43,20 +58,22 @@ divs.forEach(div => {
             job_card.classList.add("Job-card");
             job_card.setAttribute('data-status', 'Applied');
             count++;
-            job_card.innerHTML = `
-                <p> ${count} </p>
-                <p> ${jobTitle} </p>
-                <p> ${company_name} </p>
-                <p class="status-display">Status: Applied</p>
-                <p> ${Date.now()} </p>
-                <p> ${job_desc} </p>
+            const dateApplied = new Date().toLocaleDateString();
 
-                <div class="status-controls">
-                    <button class="status-btn" data-target="Interview">Interview</button>
-                    <button class="status-btn" data-target="Offer">Offer</button>
-                    <button class="status-btn" data-target="Rejected">Reject</button>
+            job_card.innerHTML = `
+                <p>${count}</p>
+                <p>${jobTitle}</p>
+                <p>${company_name}</p>
+                <p class="status-display">Applied</p>
+                <p>${dateApplied}</p>
+                <div class="job-actions">
+                    <div class="status-controls">
+                        <button class="status-btn" data-target="Interview">Interview</button>
+                        <button class="status-btn" data-target="Offer">Offer</button>
+                        <button class="status-btn" data-target="Rejected">Reject</button>
+                    </div>
+                    <button type="button" class="remove-btn">Remove</button>
                 </div>
-                <button type="button" class="remove-btn">Remove</button>
             `;
 
             // Status Pipeline Logic
@@ -72,7 +89,7 @@ divs.forEach(div => {
                     updateCounter(newStatus, 1);
 
                     job_card.setAttribute('data-status', newStatus);
-                    job_card.querySelector('.status-display').textContent = `Status: ${newStatus}`;
+                    job_card.querySelector('.status-display').textContent = newStatus;
                 });
             });
 
@@ -104,4 +121,9 @@ divs.forEach(div => {
             overlay.classList.remove("active");
         });
     }
+
+    if(div.id == "Offer" || div.id == "all" || div.id == "Interview" || div.id == "Rejected") {
+        filterCards(div);
+    }
+
 });
